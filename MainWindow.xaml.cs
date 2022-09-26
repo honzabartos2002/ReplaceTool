@@ -39,6 +39,16 @@ namespace ReplaceTool
                 MessageBox.Show("Vyplňte prosím všechna pole");
             }
             novyTextBox.Text = novyObsah;
+
+            if (copyCheckBox.IsChecked == true)
+            {
+                Clipboard.SetText(novyTextBox.Text);
+            }
+
+            if(replaceCheckBox.IsChecked == true)
+            {
+                puvodniTextBox.Text = novyTextBox.Text;
+            }
         }
 
         private void clipboard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -55,6 +65,20 @@ namespace ReplaceTool
         private void clipboard_MouseLeave(object sender, MouseEventArgs e)
         {
             clipboard.Opacity = 1;
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            obsah = puvodniVyraz.Text;
+            puvodniVyraz.Text = novyVyraz.Text;
+            novyVyraz.Text = obsah;
+        }
+
+        private void swapText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            obsah = puvodniTextBox.Text;
+            puvodniTextBox.Text = novyTextBox.Text;
+            novyTextBox.Text = obsah;
         }
     }
 }
