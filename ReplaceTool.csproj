@@ -5,18 +5,21 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\clipboard.png" />
+    <None Remove="Resources\icon.ico" />
+    <None Remove="Resources\icon.png" />
     <None Remove="Resources\switch.png" />
-    <None Remove="switch.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\clipboard.png" />
+    <Resource Include="Resources\icon.ico" />
+    <Resource Include="Resources\icon.png" />
     <Resource Include="Resources\switch.png" />
-    <Resource Include="switch.png" />
   </ItemGroup>
 
   <ItemGroup>

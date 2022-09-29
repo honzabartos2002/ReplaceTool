@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +24,8 @@ namespace ReplaceTool
     {
         string obsah;
         string novyObsah;
+        int predchoziPocetZmen = 9999;
+        int pocetZmen = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -29,16 +33,15 @@ namespace ReplaceTool
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
         {
-            obsah = puvodniTextBox.Text;
+            pocetZmen = Regex.Matches(puvodniTextBox.Text, Regex.Escape(puvodniVyraz.Text)).Count;
             try
             {
-                novyObsah = obsah.Replace(puvodniVyraz.Text, novyVyraz.Text);
+                novyTextBox.Text = puvodniTextBox.Text.Replace(puvodniVyraz.Text, novyVyraz.Text);
             }
             catch
             {
                 MessageBox.Show("Vyplňte prosím všechna pole");
             }
-            novyTextBox.Text = novyObsah;
 
             if (copyCheckBox.IsChecked == true)
             {
@@ -49,6 +52,16 @@ namespace ReplaceTool
             {
                 puvodniTextBox.Text = novyTextBox.Text;
             }
+           
+            if(predchoziPocetZmen != pocetZmen && pocetZmen != 0 && predchoziPocetZmen != 9999){
+                MessageBox.Show("Došlo k jinému počtu úprav (" + pocetZmen +") než v předchozí operaci (" + predchoziPocetZmen + "). Zkontrolujte si prosím výstup.");
+            }
+
+            if(pocetZmen != 0)
+            {
+                predchoziPocetZmen = pocetZmen;
+            }
+            
         }
 
         private void clipboard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
