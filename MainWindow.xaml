@@ -39,6 +39,6 @@
             </Image.OpacityMask>
         </Image>
         <CheckBox x:Name="copyCheckBox" Grid.Row="2" Height="30" Width="220" Content="Automaticky kopírovat po nahrazení" IsChecked="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5, 0, 0, 0" IsTabStop="False"/>
-        <CheckBox x:Name="replaceCheckBox" Grid.Row="2" Height="30" Width="220" Content="Automaticky nahradit původní text" IsChecked="True" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0" IsTabStop="False"/>
+        <CheckBox x:Name="replaceCheckBox" Grid.Row="2" Height="30" Width="220" Content="Automaticky nahradit původní text" IsChecked="False" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0" IsTabStop="False"/>
     </Grid>
 </Window>
