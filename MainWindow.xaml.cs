@@ -23,7 +23,6 @@ namespace ReplaceTool
     public partial class MainWindow : Window
     {
         string obsah;
-        string novyObsah;
         int predchoziPocetZmen = 9999;
         int pocetZmen = 0;
         public MainWindow()
@@ -54,7 +53,7 @@ namespace ReplaceTool
             }
            
             if(predchoziPocetZmen != pocetZmen && pocetZmen != 0 && predchoziPocetZmen != 9999){
-                MessageBox.Show("Došlo k jinému počtu úprav (" + pocetZmen +") než v předchozí operaci (" + predchoziPocetZmen + "). Zkontrolujte si prosím výstup.");
+                MessageBox.Show("Došlo k jinému počtu úprav (" + pocetZmen + ") než v předchozí operaci (" + predchoziPocetZmen + "). Zkontrolujte si prosím výstup.");
             }
 
             if(pocetZmen != 0)
@@ -92,6 +91,16 @@ namespace ReplaceTool
             obsah = puvodniTextBox.Text;
             puvodniTextBox.Text = novyTextBox.Text;
             novyTextBox.Text = obsah;
+        }
+
+        private void novyVyraz_GotFocus(object sender, RoutedEventArgs e)
+        {
+            novyVyraz.SelectAll();
+        }
+
+        private void puvodniVyraz_GotFocus(object sender, RoutedEventArgs e)
+        {
+            puvodniVyraz.SelectAll();
         }
     }
 }
