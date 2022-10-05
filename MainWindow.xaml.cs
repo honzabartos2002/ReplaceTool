@@ -93,5 +93,15 @@ namespace ReplaceTool
             puvodniTextBox.Text = novyTextBox.Text;
             novyTextBox.Text = obsah;
         }
+
+        private void novyVyraz_GotFocus(object sender, RoutedEventArgs e)
+        {
+            novyVyraz.SelectAll();
+        }
+
+        private void puvodniVyraz_GotFocus(object sender, RoutedEventArgs e)
+        {
+            puvodniVyraz.SelectAll();
+        }
     }
 }
