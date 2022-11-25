@@ -8,7 +8,7 @@
         Title="ReplaceTool" Height="450" Width="800" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="/Resources/icon.png">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.20*"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.20*"/>
         </Grid.RowDefinitions>
@@ -17,28 +17,29 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="label1" Content="Původní text" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding PocatecniIndex, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" MinWidth="120" Margin="8" VerticalAlignment="Top" HorizontalAlignment="Center"/>
         <Label x:Name="label2" Content="Nový text" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-        <TextBox x:Name="puvodniVyraz" Height="20" Width="300" Margin="0, 10, 0, 0" Grid.Column="0" GotFocus="puvodniVyraz_GotFocus"/>
-        <TextBox x:Name="novyVyraz" Height="20" Width="300" Margin="0, 10, 0, 0" Grid.Column="1" GotFocus="novyVyraz_GotFocus"/>
-        <TextBox x:Name="puvodniTextBox" Grid.Row="1" Grid.Column="0" Margin="20, 20" TextWrapping="Wrap" AcceptsReturn="True" IsTabStop="False"/>
-        <TextBox x:Name="novyTextBox" Grid.Row="1" Grid.Column="1" Margin="20, 20" IsReadOnly="True" TextWrapping="Wrap" IsTabStop="False"/>
-        <Button x:Name="confirmButton" Grid.ColumnSpan="2" Grid.Row="3" Content="Nahradit" Width="70" Height="20" Click="confirmButton_Click" IsTabStop="False"/>
+        <TextBox x:Name="puvodniVyraz" Text="{Binding PuvodniText, UpdateSourceTrigger=PropertyChanged}" Height="20" Width="300" Margin="0, 10, 0, 0" Grid.Column="0" GotFocus="puvodniVyraz_GotFocus"/>
+        <TextBox x:Name="novyVyraz" Text="{Binding NovyText, UpdateSourceTrigger=PropertyChanged}" Height="20" Width="300" Margin="0 10 0 0" Grid.Column="1" GotFocus="novyVyraz_GotFocus"/>
+        <TextBox Text="{Binding PuvodniTB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="20, 20" TextWrapping="Wrap" AcceptsReturn="True" IsTabStop="False"/>
+        <TextBox Text="{Binding NovyTB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="20, 20" IsReadOnly="True" TextWrapping="Wrap" IsTabStop="False"/>
+        <Button x:Name="confirmButton" IsEnabled="{Binding IsValid, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Grid.Row="3" Content="Nahradit" Width="70" Height="20" Click="confirmButton_Click" IsTabStop="False"/>
         <Image x:Name="clipboard" Grid.Column="1" Grid.Row="2" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Right" Source="Resources/clipboard.png" Stretch="Fill" Margin="0, 0, 21, 5" Panel.ZIndex="1" MouseLeftButtonDown="clipboard_MouseLeftButtonDown" MouseLeftButtonUp="clipboard_MouseLeftButtonUp" MouseLeave="clipboard_MouseLeave">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="/Resources/clipboard.png"/>
             </Image.OpacityMask>
         </Image>
-        <Image x:Name="swapVyraz" Grid.ColumnSpan="2" Grid.Row="0" Height="25" Width="25" Margin="0, 10, 0, 0" MouseDown="Image_MouseDown" Source="/Resources/switch.png" Panel.ZIndex="1">
+        <Image x:Name="switchExpression" Grid.ColumnSpan="2" Grid.Row="0" Height="25" Width="25" Margin="0, 10, 0, 0" MouseDown="switchExpression_MouseDown" Source="/Resources/switch.png" Panel.ZIndex="1">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="/Resources/switch.png"/>
             </Image.OpacityMask>
         </Image>
-        <Image x:Name="swapText" Grid.ColumnSpan="2" Grid.Row="1" Height="25" Width="25" MouseDown="swapText_MouseDown" Panel.ZIndex="1" Stretch="Fill" Source="/Resources/switch.png">
+        <Image x:Name="switchText" Grid.ColumnSpan="2" Grid.Row="1" Height="25" Width="25" MouseDown="switchText_MouseDown" Panel.ZIndex="1" Stretch="Fill" Source="/Resources/switch.png">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="/Resources/switch.png"/>
             </Image.OpacityMask>
         </Image>
-        <CheckBox x:Name="copyCheckBox" Grid.Row="2" Height="30" Width="220" Content="Automaticky kopírovat po nahrazení" IsChecked="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5, 0, 0, 0" IsTabStop="False"/>
-        <CheckBox x:Name="replaceCheckBox" Grid.Row="2" Height="30" Width="220" Content="Automaticky nahradit původní text" IsChecked="False" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0" IsTabStop="False"/>
+        <CheckBox Grid.Row="2" Height="30" Width="220" Content="Automaticky kopírovat po nahrazení" IsChecked="{Binding CopyText, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5, 0, 0, 0" IsTabStop="False"/>
+        <CheckBox Grid.Row="2" Height="30" Width="220" Content="Automaticky nahradit původní text" IsChecked="{Binding ReplaceText, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0" IsTabStop="False"/>
     </Grid>
 </Window>

@@ -24,48 +24,48 @@ namespace ReplaceTool
     {
         string obsah;
         int predchoziPocetZmen = 9999;
-        int pocetZmen = 0;
+
+
+        public ReplaceDTO Data { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            Data = new ReplaceDTO();
+            this.DataContext = Data;
         }
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
         {
-            pocetZmen = Regex.Matches(puvodniTextBox.Text, Regex.Escape(puvodniVyraz.Text)).Count;
-            try
+            if (Data.IsValid)
             {
-                novyTextBox.Text = puvodniTextBox.Text.Replace(puvodniVyraz.Text, novyVyraz.Text);
-            }
-            catch
-            {
-                MessageBox.Show("Vyplňte prosím všechna pole");
+                Data.ReplaceNovyTB();
+
+                if (Data.CopyText)
+                {
+                    Clipboard.SetText(Data.NovyText);
+                }
+
+                if (Data.ReplaceText)
+                {
+                    Data.PuvodniTB = Data.NovyTB;
+                }
+
+                if (predchoziPocetZmen != Data.PocetZmen && Data.PocetZmen != 0 && predchoziPocetZmen != 9999)
+                {
+                    MessageBox.Show("Došlo k jinému počtu úprav (" + Data.PocetZmen + ") než v předchozí operaci (" + predchoziPocetZmen + "). Zkontrolujte si prosím výstup.");
+                }
+
+                if (Data.PocetZmen != 0)
+                {
+                    predchoziPocetZmen = Data.PocetZmen;
+                }
             }
 
-            if (copyCheckBox.IsChecked == true)
-            {
-                Clipboard.SetText(novyTextBox.Text);
-            }
-
-            if(replaceCheckBox.IsChecked == true)
-            {
-                puvodniTextBox.Text = novyTextBox.Text;
-            }
-           
-            if(predchoziPocetZmen != pocetZmen && pocetZmen != 0 && predchoziPocetZmen != 9999){
-                MessageBox.Show("Došlo k jinému počtu úprav (" + pocetZmen + ") než v předchozí operaci (" + predchoziPocetZmen + "). Zkontrolujte si prosím výstup.");
-            }
-
-            if(pocetZmen != 0)
-            {
-                predchoziPocetZmen = pocetZmen;
-            }
-            
         }
 
         private void clipboard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Clipboard.SetText(novyTextBox.Text);
+            Clipboard.SetText(Data.NovyTB);
             clipboard.Opacity = 0.3;
         }
         
@@ -79,18 +79,14 @@ namespace ReplaceTool
             clipboard.Opacity = 1;
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        private void switchExpression_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            obsah = puvodniVyraz.Text;
-            puvodniVyraz.Text = novyVyraz.Text;
-            novyVyraz.Text = obsah;
+            Data.SwitchExpressions();
         }
 
-        private void swapText_MouseDown(object sender, MouseButtonEventArgs e)
+        private void switchText_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            obsah = puvodniTextBox.Text;
-            puvodniTextBox.Text = novyTextBox.Text;
-            novyTextBox.Text = obsah;
+            Data.SwitchTBs();
         }
 
         private void novyVyraz_GotFocus(object sender, RoutedEventArgs e)
