@@ -63,11 +63,6 @@ namespace ReplaceTool
             {
                 clipboard.Opacity = 1;
             }
-            if ((!string.IsNullOrEmpty(Data.PuvodniTB) && !string.IsNullOrEmpty(Data.PuvodniExpression) && !string.IsNullOrEmpty(Data.NovyExpression)))
-            {
-                bool s = Data.IsValid;
-
-            }
         }
         
         private void clipboard_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
