@@ -14,14 +14,14 @@ namespace ReplaceTool
         public bool IsValid {
             get 
             {
-                return (!string.IsNullOrEmpty(PuvodniTB) && !string.IsNullOrEmpty(PuvodniText) && !string.IsNullOrEmpty(NovyText));
+                return (!string.IsNullOrEmpty(PuvodniTB) && !string.IsNullOrEmpty(PuvodniExpression) && !string.IsNullOrEmpty(NovyExpression));
             } 
         }
         public int PocetZmen
         {
             get
             {
-                return (Regex.Matches(PuvodniTB, Regex.Escape(PuvodniText)).Count);
+                return (Regex.Matches(PuvodniTB, Regex.Escape(PuvodniExpression)).Count);
             }
         }
         public void SwitchTBs()
@@ -32,21 +32,21 @@ namespace ReplaceTool
         }
         public void SwitchExpressions()
         {
-            string tmp = PuvodniText;
-            PuvodniText = NovyText;
-            NovyText = tmp;
+            string tmp = PuvodniExpression;
+            PuvodniExpression = NovyExpression;
+            NovyExpression = tmp;
         }
 
         public void ReplaceNovyTB()
         {
             if (PocatecniIndex > 0)
             {
-                NovyTB = PuvodniTB.Replace(PuvodniText, NovyText+ (PocatecniIndex+1));
+                NovyTB = PuvodniTB.Replace(PuvodniExpression, NovyExpression + (PocatecniIndex + 1));
                 PocatecniIndex++;
             }
             else
             {
-                NovyTB = PuvodniTB.Replace(PuvodniText, NovyText);
+                NovyTB = PuvodniTB.Replace(PuvodniExpression, NovyExpression);
             }
         }
 
@@ -131,40 +131,40 @@ namespace ReplaceTool
             }
         }
 
-        private string _puvodniText;
+        private string _puvodniExpression;
 
-        public string PuvodniText
+        public string PuvodniExpression
         {
             get
             {
-                return _puvodniText;
+                return _puvodniExpression;
             }
             set
             {
-                if (_puvodniText != value)
+                if (_puvodniExpression != value)
                 {
-                    _puvodniText = value;
-                    OnPropertyRaised("PuvodniText");
+                    _puvodniExpression = value;
+                    OnPropertyRaised("PuvodniExpression");
                     OnPropertyRaised("IsValid");
                     OnPropertyRaised("PocetZmen");
                 }
             }
         }
 
-        private string _novyText;
+        private string _novyExpression;
 
-        public string NovyText
+        public string NovyExpression
         {
             get
             {
-                return _novyText;
+                return _novyExpression;
             }
             set
             {
-                if (_novyText != value)
+                if (_novyExpression != value)
                 {
-                    _novyText = value;
-                    OnPropertyRaised("NovyText");
+                    _novyExpression = value;
+                    OnPropertyRaised("NovyExpression");
                     OnPropertyRaised("IsValid");
                 }
             }

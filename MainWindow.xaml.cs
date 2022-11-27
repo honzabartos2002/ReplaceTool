@@ -1,19 +1,5 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ReplaceTool
 {
@@ -22,11 +8,10 @@ namespace ReplaceTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        string obsah;
         int predchoziPocetZmen = 9999;
 
-
         public ReplaceDTO Data { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +27,7 @@ namespace ReplaceTool
 
                 if (Data.CopyText)
                 {
-                    Clipboard.SetText(Data.NovyText);
+                    Clipboard.SetText(Data.NovyTB);
                 }
 
                 if (Data.ReplaceText)
@@ -65,8 +50,24 @@ namespace ReplaceTool
 
         private void clipboard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Clipboard.SetText(Data.NovyTB);
-            clipboard.Opacity = 0.3;
+            try
+            {
+                Clipboard.SetText(Data.NovyTB);
+                clipboard.Opacity = 0.3;
+            }
+            catch 
+            {
+                MessageBox.Show("Není zde nic ke zkopírování");
+            }
+            finally 
+            {
+                clipboard.Opacity = 1;
+            }
+            if ((!string.IsNullOrEmpty(Data.PuvodniTB) && !string.IsNullOrEmpty(Data.PuvodniExpression) && !string.IsNullOrEmpty(Data.NovyExpression)))
+            {
+                bool s = Data.IsValid;
+
+            }
         }
         
         private void clipboard_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
