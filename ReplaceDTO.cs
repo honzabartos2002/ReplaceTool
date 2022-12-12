@@ -11,7 +11,8 @@ namespace ReplaceTool
 
         }
 
-        public bool IsValid {
+        public bool IsValid 
+        {
             get 
             {
                 return (!string.IsNullOrEmpty(PuvodniTB) && !string.IsNullOrEmpty(PuvodniExpression) && !string.IsNullOrEmpty(NovyExpression));
